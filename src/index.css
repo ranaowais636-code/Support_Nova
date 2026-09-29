@@ -1,0 +1,397 @@
+@import "tailwindcss";
+
+/* ─── SupportNova Design Tokens ─────────────────────────────────────────── */
+:root {
+  --sn-primary: #C6FF00;
+  --sn-primary-hover: #A8D900;
+  --sn-primary-soft: #F5FFCC;
+  --sn-bg: #F9F9EE;
+  --sn-bg-elevated: #FFFFFF;
+  --sn-bg-muted: #F0F0E4;
+  --sn-text: #111111;
+  --sn-text-secondary: #4A4A42;
+  --sn-text-muted: #6B6B60;
+  --sn-border: #E2E2D4;
+  --sn-border-strong: #C8C8B8;
+  --sn-card-shadow: 0 1px 3px rgba(17, 17, 15, 0.06), 0 4px 16px rgba(17, 17, 15, 0.04);
+  --sn-card-shadow-hover: 0 4px 12px rgba(17, 17, 15, 0.08), 0 12px 32px rgba(17, 17, 15, 0.06);
+  --sn-sidebar: #FFFFFF;
+  --sn-header: #FFFFFF;
+  --sn-success: #16A34A;
+  --sn-warning: #D97706;
+  --sn-danger: #DC2626;
+  --sn-info: #2563EB;
+}
+
+[data-theme="dark"] {
+  --sn-primary: #C6FF00;
+  --sn-primary-hover: #A8D900;
+  --sn-primary-soft: #2A331A;
+  --sn-bg: #11110F;
+  --sn-bg-elevated: #1A1A17;
+  --sn-bg-muted: #22221E;
+  --sn-text: #F2F2F2;
+  --sn-text-secondary: #C8C8C0;
+  --sn-text-muted: #8A8A80;
+  --sn-border: #2E2E28;
+  --sn-border-strong: #3E3E36;
+  --sn-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+  --sn-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.3);
+  --sn-sidebar: #161612;
+  --sn-header: #161612;
+  --sn-success: #22C55E;
+  --sn-warning: #F59E0B;
+  --sn-danger: #EF4444;
+  --sn-info: #3B82F6;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--sn-bg);
+  color: var(--sn-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Inter for all body / UI text; Luxomona reserved for major headings */
+.sn-font { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+.sn-heading { font-family: 'Luxomona', 'Inter', system-ui, sans-serif; letter-spacing: -0.01em; }
+h1, h2, h3, .sn-page-title, .sn-section-title {
+  font-family: 'Luxomona', 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+.sn-bg { background-color: var(--sn-bg); }
+.sn-bg-elevated { background-color: var(--sn-bg-elevated); }
+.sn-bg-muted { background-color: var(--sn-bg-muted); }
+.sn-text { color: var(--sn-text); }
+.sn-text-secondary { color: var(--sn-text-secondary); }
+.sn-text-muted { color: var(--sn-text-muted); }
+.sn-border { border-color: var(--sn-border); }
+.sn-primary { color: var(--sn-primary); }
+.sn-primary-bg { background-color: var(--sn-primary); color: #111111; }
+.sn-primary-bg:hover { background-color: var(--sn-primary-hover); }
+.sn-primary-soft { background-color: var(--sn-primary-soft); }
+
+.sn-card {
+  background-color: var(--sn-bg-elevated);
+  border: 1px solid var(--sn-border);
+  border-radius: 14px;
+  box-shadow: var(--sn-card-shadow);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.sn-card:hover {
+  box-shadow: var(--sn-card-shadow-hover);
+  border-color: color-mix(in srgb, var(--sn-primary) 35%, var(--sn-border));
+}
+
+.sn-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: inherit; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem;
+  padding: 0.625rem 1.25rem; border-radius: 8px; border: none; cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+.sn-btn:active { transform: scale(0.98); }
+.sn-btn-primary { background-color: var(--sn-primary); color: #111111; }
+.sn-btn-primary:hover { background-color: var(--sn-primary-hover); }
+.sn-btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+.sn-btn-ghost { background-color: transparent; color: var(--sn-text); border: 1px solid var(--sn-border); }
+.sn-btn-ghost:hover { background-color: var(--sn-bg-muted); border-color: var(--sn-border-strong); }
+
+.sn-input {
+  width: 100%; font-family: inherit; font-size: 0.875rem;
+  padding: 0.625rem 0.875rem; border-radius: 8px;
+  border: 1px solid var(--sn-border); background-color: var(--sn-bg-elevated);
+  color: var(--sn-text); transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sn-input:focus { outline: none; border-color: var(--sn-primary); box-shadow: 0 0 0 3px var(--sn-primary-soft); }
+.sn-input::placeholder { color: var(--sn-text-muted); }
+
+.sn-login-form .relative > svg {
+  left: 0.875rem;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+.sn-login-form .relative > input {
+  padding-left: 2.75rem;
+}
+
+@keyframes sn-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sn-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sn-slide-right {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.sn-animate-fade-up { animation: sn-fade-up 0.6s ease-out both; }
+.sn-animate-fade-in { animation: sn-fade-in 0.4s ease-out both; }
+.sn-animate-slide-right { animation: sn-slide-right 0.5s ease-out both; }
+.sn-delay-100 { animation-delay: 0.1s; }
+.sn-delay-200 { animation-delay: 0.2s; }
+.sn-delay-300 { animation-delay: 0.3s; }
+.sn-delay-400 { animation-delay: 0.4s; }
+.sn-delay-500 { animation-delay: 0.5s; }
+
+.sn-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.sn-reveal.visible { opacity: 1; transform: translateY(0); }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--sn-bg); }
+::-webkit-scrollbar-thumb { background: var(--sn-border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sn-text-muted); }
+
+.sn-chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
+.sn-chat-panel {
+  width: 380px; max-width: calc(100vw - 32px); height: 520px; max-height: calc(100vh - 100px);
+  border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18); border: 1px solid var(--sn-border);
+  background: var(--sn-bg-elevated);
+}
+
+.sn-hero-canvas {
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, var(--sn-primary-soft) 0%, transparent 70%), var(--sn-bg);
+  position: relative; overflow: hidden;
+}
+.sn-hero-grid {
+  background-image: linear-gradient(var(--sn-border) 1px, transparent 1px), linear-gradient(90deg, var(--sn-border) 1px, transparent 1px);
+  background-size: 48px 48px; opacity: 0.35; position: absolute; inset: 0;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 80%);
+}
+
+.sn-badge {
+  display: inline-flex; align-items: center; padding: 0.2rem 0.6rem;
+  border-radius: 9999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em;
+}
+.sn-badge-verified { background: color-mix(in srgb, var(--sn-success) 15%, transparent); color: var(--sn-success); }
+.sn-badge-review { background: color-mix(in srgb, var(--sn-warning) 15%, transparent); color: var(--sn-warning); }
+.sn-badge-critical { background: color-mix(in srgb, var(--sn-danger) 15%, transparent); color: var(--sn-danger); }
+.sn-badge-new { background: var(--sn-primary-soft); color: #111111; }
+
+.sn-nav-item {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.875rem;
+  border-radius: 8px; font-size: 0.875rem; font-weight: 500;
+  color: var(--sn-text-secondary); cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.sn-nav-item:hover { background-color: var(--sn-bg-muted); color: var(--sn-text); }
+.sn-nav-item.active { background-color: var(--sn-primary-soft); color: #111111; font-weight: 600; }
+[data-theme="dark"] .sn-nav-item.active { color: var(--sn-primary); }
+.sn-role-shell .review-queue-badge {
+  background-color: #C6FF00 !important;
+  color: #111111 !important;
+}
+
+.sn-table-row { transition: background-color 0.12s ease; }
+.sn-table-row:hover { background-color: var(--sn-bg-muted); }
+
+/* ─── Responsive / premium presentation polish ─────────────────────────── */
+html, body, #root { min-width: 0; max-width: 100%; }
+body { overflow-x: hidden; }
+img, svg, video, canvas { max-width: 100%; }
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+
+.sn-feature-card,
+.sn-workflow-card,
+.sn-review-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.sn-feature-card::before,
+.sn-workflow-card::before,
+.sn-review-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sn-primary), color-mix(in srgb, var(--sn-primary) 35%, transparent));
+  opacity: 0.9;
+}
+
+.sn-feature-card:hover,
+.sn-workflow-card:hover,
+.sn-review-card:hover {
+  transform: translateY(-4px);
+}
+
+[data-theme="light"] .sn-review-card::before {
+  background: #D0E073;
+}
+
+.sn-step-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--sn-primary-soft);
+  color: var(--sn-text-secondary);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.sn-review-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid var(--sn-bg-elevated);
+  box-shadow: 0 0 0 1px var(--sn-border);
+  background: var(--sn-primary-soft);
+}
+.sn-review-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.sn-chat-faq {
+  flex: 0 0 auto;
+  max-height: 154px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.sn-chat-faq-btn {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+}
+.sn-chat-faq-btn:hover {
+  border-color: color-mix(in srgb, var(--sn-primary) 50%, var(--sn-border)) !important;
+  background: var(--sn-primary-soft) !important;
+  color: var(--sn-text) !important;
+}
+
+.sn-role-shell {
+  --sn-role-accent: #B4C45A;
+  --sn-role-accent-hover: #99AA3F;
+  --sn-role-control-bg: var(--sn-primary);
+  --sn-role-control-hover: var(--sn-primary-hover);
+  --sn-role-table-header-bg: #DCEB91;
+}
+
+/* Keep legacy role utility classes aligned without changing landing or login. */
+.sn-role-shell :where([class*="text-[#6C4AB6]"], [class*="text-[#9D84D9]"]) { color: var(--sn-role-accent) !important; }
+.sn-role-shell :where([class*="hover:text-[#593A9C]"]):hover { color: var(--sn-role-accent-hover) !important; }
+.sn-role-shell :where([class*="hover:text-[#171A3A]"]):hover { color: var(--sn-text) !important; }
+.sn-role-shell :where([class*="bg-[#6C4AB6]"]) { background-color: var(--sn-role-accent) !important; color: #111111 !important; }
+.sn-role-shell :where([class*="hover:bg-[#593A9C]"]):hover { background-color: var(--sn-role-accent-hover) !important; }
+.sn-role-shell :where([class*="bg-[#171A3A]"]) { background-color: var(--sn-text) !important; }
+.sn-role-shell :where([class*="border-[#232854]"]) { border-color: var(--sn-border-strong) !important; }
+.sn-role-shell :where([class*="bg-[#EDE7F6]"], [class*="bg-[#F4F1FA]"], [class*="bg-[#F0EBF9]"], [class*="bg-[#F9F8FC]"], [class*="bg-[#FAF9FD]"]) {
+  background-color: var(--sn-primary-soft) !important;
+}
+.sn-role-shell :where([class*="border-[#D1C4E9]"], [class*="border-[#D3C7EE]"]) { border-color: var(--sn-border-strong) !important; }
+.sn-role-shell :where([class*="border-[#E2DCF0]"], [class*="border-[#F0EBF9]"]) { border-color: var(--sn-border) !important; }
+.sn-role-shell :where([class*="text-[#171A3A]"]) { color: var(--sn-text) !important; }
+.sn-role-shell :where([class*="text-[#555E7A]"], [class*="text-[#444D6E]"]) { color: var(--sn-text-secondary) !important; }
+.sn-role-shell :where([class*="text-[#79819A]"], [class*="text-[#99A2BD]"]) { color: var(--sn-text-muted) !important; }
+.sn-role-shell :where([class*="focus:ring-[#6C4AB6]"]):focus { --tw-ring-color: var(--sn-role-accent) !important; }
+
+/* Role tables keep the accent on the header only; data rows stay neutral. */
+.sn-role-shell table thead tr {
+  background: var(--sn-role-table-header-bg) !important;
+  color: #111111 !important;
+}
+.sn-role-shell table thead tr th { color: #111111 !important; }
+.sn-role-shell table tbody tr,
+.sn-role-shell table tbody tr:hover {
+  background: var(--sn-bg-elevated) !important;
+}
+
+[data-theme="dark"] .sn-role-shell {
+  --sn-role-accent: #D0E073;
+  --sn-role-accent-hover: #B9C75E;
+  --sn-role-control-bg: #C6FF00;
+  --sn-role-control-hover: #A8D900;
+  --sn-role-table-header-bg: #DCEB91;
+}
+
+[data-theme="dark"] .sn-role-shell :where([class~="bg-white"]) { background-color: var(--sn-bg-elevated) !important; }
+[data-theme="dark"] .sn-role-shell :where([class~="text-white"]) { color: var(--sn-text) !important; }
+[data-theme="dark"] .sn-role-shell :where([class~="border-white"]) { border-color: var(--sn-border) !important; }
+
+/* Role controls use the bright logo accent in both themes. */
+.sn-role-shell button[class*="bg-[#6C4AB6]"] {
+  background: var(--sn-role-control-bg) !important;
+  color: #111111 !important;
+}
+.sn-role-shell button[class*="bg-[#6C4AB6]"]:hover {
+  background: var(--sn-role-control-hover) !important;
+  color: #111111 !important;
+}
+
+[data-theme="dark"] .sn-role-shell input::placeholder,
+[data-theme="dark"] .sn-role-shell textarea::placeholder,
+[data-theme="dark"] .sn-role-shell select::placeholder {
+  color: #F2F2F2 !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 767px) {
+  .sn-chat-widget {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .sn-chat-panel {
+    width: min(420px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    height: min(620px, calc(100dvh - 88px));
+    max-height: calc(100dvh - 88px);
+    border-radius: 14px;
+  }
+  .sn-chat-faq {
+    max-height: 142px;
+  }
+  .sn-chat-widget > button {
+    width: 52px !important;
+    height: 52px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .sn-chat-panel {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    height: min(650px, calc(100dvh - 78px));
+    max-height: calc(100dvh - 78px);
+  }
+  .sn-chat-widget { right: 8px; }
+}
+
+@media (min-width: 768px) {
+  .sn-chat-panel {
+    width: 400px;
+    height: min(600px, calc(100dvh - 110px));
+    max-height: calc(100dvh - 110px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sn-reveal,
+  .sn-card,
+  .sn-feature-card,
+  .sn-workflow-card,
+  .sn-review-card {
+    transition: none !important;
+  }
+}
+
+/* Keep dense role dashboards usable on narrow screens. */
+@media (max-width: 767px) {
+  .sn-card { border-radius: 12px; }
+  .sn-btn { min-height: 40px; }
+  .sn-input { min-height: 40px; }
+}

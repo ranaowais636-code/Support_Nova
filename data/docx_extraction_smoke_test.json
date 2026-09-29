@@ -1,0 +1,10 @@
+{
+  "filename": "sample_policy.docx",
+  "expected_sections": 3,
+  "expected_keywords": [
+    "Safety Escalation",
+    "Refund Handling",
+    "immediate safety escalation"
+  ],
+  "status": "SMOKE_TEST_FIXTURE"
+}
