@@ -1,0 +1,6 @@
+{
+  "name": "SupportNova - Complaint Resolution Intelligence",
+  "description": "Enterprise customer complaint resolution intelligence system with dual-pipeline GenAI analysis and independent Python ground-truth validation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

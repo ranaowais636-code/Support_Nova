@@ -1,0 +1,7 @@
+# SupportNova Python runtime dependencies
+pypdf>=5.0.0
+python-docx>=1.1.0
+
+# Optional semantic retrieval acceleration (lexical retrieval remains available without these packages)
+sentence-transformers>=3.0.0
+faiss-cpu>=1.8.0
